@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Parse both marketplace manifests
+        run: |
+          python3 -c "import json; json.load(open('.claude-plugin/marketplace.json'))"
+          python3 -c "import json; json.load(open('.agents/plugins/marketplace.json'))"
+
+      - name: Check every plugin source resolves
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # A catalog whose entries point at repos that moved or went private is
+          # worse than no catalog — it fails at install time, on the user's machine.
+          python3 -c "
+          import json, re
+          repos = set()
+          for p in json.load(open('.claude-plugin/marketplace.json'))['plugins']:
+              src = p['source']
+              repos.add(src['repo'] if isinstance(src, dict) else src)
+          for p in json.load(open('.agents/plugins/marketplace.json'))['plugins']:
+              url = p['source'].get('url', '')
+              m = re.search(r'github\.com/([^/]+/[^/]+?)(?:\.git)?\$', url)
+              if m:
+                  repos.add(m.group(1))
+          print('\n'.join(sorted(repos)))
+          " | while read -r repo; do
+            echo "checking $repo"
+            gh api "repos/$repo" --jq '.full_name' > /dev/null
+          done
+
+      - name: Codex entries must carry the fields Codex requires
+        run: |
+          python3 -c "
+          import json, sys
+          bad = []
+          for p in json.load(open('.agents/plugins/marketplace.json'))['plugins']:
+              pol = p.get('policy', {})
+              if not pol.get('installation') or not pol.get('authentication') or not p.get('category'):
+                  bad.append(p.get('name', '?'))
+          if bad:
+              sys.exit('missing policy/category: ' + ', '.join(bad))
+          print('all Codex entries complete')
+          "

@@ -1,0 +1,35 @@
+{
+  "name": "getty",
+  "owner": {
+    "name": "Torsten Raudssus",
+    "email": "getty@conflict.industries",
+    "url": "https://github.com/Getty"
+  },
+  "description": "Plugins by Getty for Claude Code and Codex — skill distribution, subagent briefing, and whatever comes next.",
+  "plugins": [
+    {
+      "name": "briefing",
+      "source": {
+        "source": "github",
+        "repo": "Getty/briefing"
+      },
+      "description": "Programmatic briefing beats prompt stuffing. Pre-loads declared skills into a subagent's context at spawn time, so it wakes up already briefed.",
+      "license": "Artistic-2.0",
+      "homepage": "https://github.com/Getty/briefing",
+      "category": "productivity",
+      "tags": ["subagents", "skills", "context", "hooks"]
+    },
+    {
+      "name": "manage-skills",
+      "source": {
+        "source": "github",
+        "repo": "Getty/manage-skills"
+      },
+      "description": "Hardlink-based skill sharing across projects — one source of truth per skill, hardlinks everywhere else. Puts the manage-skills CLI on PATH and ships its own skills.",
+      "license": "MIT",
+      "homepage": "https://github.com/Getty/manage-skills",
+      "category": "productivity",
+      "tags": ["skills", "hardlinks", "sync", "sharing"]
+    }
+  ]
+}
