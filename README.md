@@ -30,22 +30,17 @@ reference resolves without anything else. If you want the command in your own sh
 worth doing in either harness, since a plugin only reaches the agent's shell — install it
 directly (below).
 
-## Every plugin also runs on its own track
+## manage-skills also runs on its own track
 
-This catalog is the convenient way in, never the only one. Each plugin lives in and is
-released from its own repository, keeps its own version, and stays installable without
-this repo:
+This catalog is the convenient way in. For `manage-skills` it is not the only one:
 
 ```
-/plugin marketplace add Getty/briefing        # briefing is its own one-plugin marketplace
-codex plugin marketplace add Getty/briefing
-
 curl -fsSL https://raw.githubusercontent.com/Getty/manage-skills/main/install.sh | sh
 ```
 
-`manage-skills` is a standalone CLI first and a plugin second: a single self-contained
-bash script with no dependencies, versioned on its own release cycle. It needs neither
-this catalog nor any particular agent harness — that is rather the point of it.
+It is a standalone CLI first and a plugin second — a single self-contained bash script
+with no dependencies, versioned on its own release cycle. It needs neither this catalog
+nor any particular agent harness, which is rather the point of it.
 
 ## What this repo is
 
