@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="banner.png" width="800"
+       alt="A llama in dungarees tending a market stall at sunset, under a sign reading Gettys Marketplace, with small robots and glowing plugin icons on the counter">
+</p>
+
 # Getty's plugins
 
 One marketplace for every plugin I publish — for **Claude Code** and **Codex**.
