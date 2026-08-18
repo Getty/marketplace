@@ -13,19 +13,22 @@ codex plugin marketplace add Getty/marketplace     # Codex
 | Plugin | What it does | Claude Code | Codex |
 |---|---|:--:|:--:|
 | [`briefing`](https://github.com/Getty/briefing) | Subagents declare the skills they need; a hook loads those skill bodies into the agent's context *before* its first turn. No "MANDATORY: read X first" pleading, no silent skips. | ✅ | ✅ |
-| [`manage-skills`](https://github.com/Getty/manage-skills) | One source of truth per skill, hardlinks everywhere else. Ships the `manage-skills` CLI on the Bash tool's `PATH` plus the skills that explain how to drive it. | ✅ | — |
+| [`manage-skills`](https://github.com/Getty/manage-skills) | One source of truth per skill, hardlinks everywhere else. Ships the `manage-skills` CLI plus the skills that explain how to drive it. | ✅ | ✅ |
 
 ```
 /plugin install briefing@getty
 /plugin install manage-skills@getty
 
 codex plugin add briefing@getty
+codex plugin add manage-skills@getty
 ```
 
-`manage-skills` is not listed as a Codex plugin on purpose. Its value is a command on
-your `PATH`, and a Codex plugin manifest has no way to put one there — the skills it
-ships would document a CLI that isn't installed. Under Codex, install the tool itself
-(below); it has always known how to write into `.agents/skills/`.
+A Codex plugin manifest cannot put a command on `PATH`, so `manage-skills` is reached by
+path there: the script ships in the plugin root, and the skill that documents it says
+where. Codex gives the model the absolute path of every `SKILL.md`, so a relative
+reference resolves without anything else. If you want the command in your own shell too —
+worth doing in either harness, since a plugin only reaches the agent's shell — install it
+directly (below).
 
 ## Every plugin also runs on its own track
 

@@ -17,6 +17,20 @@
         "authentication": "ON_USE"
       },
       "category": "Productivity"
+    },
+    {
+      "name": "manage-skills",
+      "description": "Hardlink-based skill sharing across projects — one source of truth per skill, hardlinks everywhere else. Ships the manage-skills CLI and the skills that explain how to drive it.",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/Getty/manage-skills.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
     }
   ]
 }
