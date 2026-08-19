@@ -38,6 +38,7 @@
         "repo": "Getty/skills"
       },
       "description": "Cross-project skills for Claude Code and Codex — Perl house style and release tooling, git conventions, Kubernetes and container operations, and the craft of writing skills themselves. Only what has no single home of its own.",
+      "license": "Artistic-2.0",
       "homepage": "https://github.com/Getty/skills",
       "category": "productivity",
       "tags": ["skills", "perl", "kubernetes", "git", "conventions"]
