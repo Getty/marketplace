@@ -31,6 +31,20 @@
         "authentication": "ON_USE"
       },
       "category": "Productivity"
+    },
+    {
+      "name": "skills",
+      "description": "Cross-project skills for Claude Code and Codex — Perl house style and release tooling, git conventions, Kubernetes and container operations, and the craft of writing skills themselves. Only what has no single home of its own.",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/Getty/skills.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "NONE"
+      },
+      "category": "Productivity"
     }
   ]
 }

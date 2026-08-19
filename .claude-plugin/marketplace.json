@@ -30,6 +30,17 @@
       "homepage": "https://github.com/Getty/manage-skills",
       "category": "productivity",
       "tags": ["skills", "hardlinks", "sync", "sharing"]
+    },
+    {
+      "name": "skills",
+      "source": {
+        "source": "github",
+        "repo": "Getty/skills"
+      },
+      "description": "Cross-project skills for Claude Code and Codex — Perl house style and release tooling, git conventions, Kubernetes and container operations, and the craft of writing skills themselves. Only what has no single home of its own.",
+      "homepage": "https://github.com/Getty/skills",
+      "category": "productivity",
+      "tags": ["skills", "perl", "kubernetes", "git", "conventions"]
     }
   ]
 }
