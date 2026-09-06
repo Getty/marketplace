@@ -5,6 +5,20 @@
   },
   "plugins": [
     {
+      "name": "agent-irc",
+      "description": "Mirrors a session's activity into IRC: prompts, tool calls with durations, subagents, token usage. One nick per session.",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/Getty/agent-irc.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
       "name": "briefing",
       "description": "Programmatic briefing beats prompt stuffing. Pre-loads declared skills into a subagent's context at spawn time, so it wakes up already briefed.",
       "source": {

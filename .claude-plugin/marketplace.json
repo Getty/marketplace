@@ -8,6 +8,18 @@
   "description": "Plugins by Getty for Claude Code and Codex — skill distribution, subagent briefing, and whatever comes next.",
   "plugins": [
     {
+      "name": "agent-irc",
+      "source": {
+        "source": "github",
+        "repo": "Getty/agent-irc"
+      },
+      "description": "Mirrors a session's activity into IRC: prompts, tool calls with durations, subagents, token usage. One nick per session.",
+      "license": "Artistic-2.0",
+      "homepage": "https://github.com/Getty/agent-irc",
+      "category": "productivity",
+      "tags": ["irc", "hooks", "mcp", "observability", "sessions"]
+    },
+    {
       "name": "briefing",
       "source": {
         "source": "github",
