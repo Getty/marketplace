@@ -6,51 +6,36 @@ on:
   pull_request:
 
 jobs:
-  validate:
+  manifests:
+    name: Both manifests agree, and every repository is a plugin
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
+      - uses: actions/checkout@v6
 
-      - name: Parse both marketplace manifests
-        run: |
-          python3 -c "import json; json.load(open('.claude-plugin/marketplace.json'))"
-          python3 -c "import json; json.load(open('.agents/plugins/marketplace.json'))"
-
-      - name: Check every plugin source resolves
+      - name: Check the manifests against each other and against GitHub
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          # A catalog whose entries point at repos that moved or went private is
-          # worse than no catalog — it fails at install time, on the user's machine.
-          python3 -c "
-          import json, re
-          repos = set()
-          for p in json.load(open('.claude-plugin/marketplace.json'))['plugins']:
-              src = p['source']
-              repos.add(src['repo'] if isinstance(src, dict) else src)
-          for p in json.load(open('.agents/plugins/marketplace.json'))['plugins']:
-              url = p['source'].get('url', '')
-              m = re.search(r'github\.com/([^/]+/[^/]+?)(?:\.git)?\$', url)
-              if m:
-                  repos.add(m.group(1))
-          print('\n'.join(sorted(repos)))
-          " | while read -r repo; do
-            echo "checking $repo"
-            gh api "repos/$repo" --jq '.full_name' > /dev/null
-          done
+        run: python3 scripts/check-manifests.py
 
-      - name: Codex entries must carry the fields Codex requires
+  parsers:
+    name: The real parsers accept the catalog
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install the current Claude Code and Codex CLIs
+        # Unpinned on purpose: what matters is the parser users have today.
+        run: npm install -g @anthropic-ai/claude-code @openai/codex
+
+      - name: Claude Code validates its manifest
+        run: claude plugin validate .
+
+      - name: Codex registers the catalog from this checkout
+        # A single bad value fails the whole manifest for everyone who has the
+        # marketplace registered, and only Codex itself knows what it accepts.
+        env:
+          CODEX_HOME: ${{ runner.temp }}/codex-home
         run: |
-          python3 -c "
-          import json, sys
-          bad = []
-          for p in json.load(open('.agents/plugins/marketplace.json'))['plugins']:
-              pol = p.get('policy', {})
-              if not pol.get('installation') or not pol.get('authentication') or not p.get('category'):
-                  bad.append(p.get('name', '?'))
-          if bad:
-              sys.exit('missing policy/category: ' + ', '.join(bad))
-          print('all Codex entries complete')
-          "
+          mkdir -p "$CODEX_HOME"
+          codex plugin marketplace add "$PWD"
+          codex plugin list
