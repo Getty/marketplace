@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Check that the two marketplace manifests agree with each other and with the
-repositories they point at.
+"""Check the two marketplace manifests against each other and against the
+repositories they point at. A plugin may appear in one manifest only (e.g.
+Claude Code but not Codex); when it appears in both, the entries must agree.
 
     python3 scripts/check-manifests.py            # everything, needs `gh`
     python3 scripts/check-manifests.py --offline  # only what the files alone can tell
@@ -71,12 +72,15 @@ def check_local(claude, codex):
         dupes = sorted({n for n in names if names.count(n) > 1})
         if dupes:
             err(f"{path}: duplicate plugin names: {', '.join(dupes)}")
+    # A plugin may be listed for one harness only (e.g. Claude Code but not
+    # Codex). That is allowed; we only note it. What must still hold: no
+    # duplicates, and when a plugin IS in both, the two entries must agree.
     only_c = sorted(set(c_names) - set(x_names))
     only_x = sorted(set(x_names) - set(c_names))
     if only_c:
-        err(f"listed for Claude Code but not for Codex: {', '.join(only_c)}")
+        print(f"note: Claude Code only (not on Codex): {', '.join(only_c)}")
     if only_x:
-        err(f"listed for Codex but not for Claude Code: {', '.join(only_x)}")
+        print(f"note: Codex only (not on Claude Code): {', '.join(only_x)}")
 
     for p in codex["plugins"]:
         n = p.get("name", "?")
