@@ -49,7 +49,7 @@
         "source": "github",
         "repo": "Getty/skilletor"
       },
-      "description": "Remote skills, agents and rules for Claude Code — declared once, synced on every session, templated per project. The preferred successor to manage-skills.",
+      "description": "Remote skills, agents and rules for Claude Code and Codex — declared once in skilletor.json, synced on every session, templated per project. The preferred successor to manage-skills.",
       "license": "MIT",
       "homepage": "https://github.com/Getty/skilletor",
       "category": "productivity",
