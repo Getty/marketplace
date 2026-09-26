@@ -32,6 +32,18 @@
       "tags": ["subagents", "skills", "context", "hooks"]
     },
     {
+      "name": "loadguard",
+      "source": {
+        "source": "github",
+        "repo": "Getty/loadguard"
+      },
+      "description": "Keeps AI-issued shell commands from taking down the host: each session runs in its own systemd scope with memory and CPU limits, so a runaway command hits a wall instead of swapping the box to death. Linux only.",
+      "license": "Artistic-2.0",
+      "homepage": "https://github.com/Getty/loadguard",
+      "category": "productivity",
+      "tags": ["systemd", "cgroups", "memory", "hooks", "safety"]
+    },
+    {
       "name": "manage-skills",
       "source": {
         "source": "github",

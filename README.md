@@ -19,12 +19,14 @@ codex plugin marketplace add Getty/marketplace     # Codex
 |---|---|:--:|:--:|:--:|
 | [`agent-irc`](https://github.com/Getty/agent-irc) | Mirrors a session into IRC as it happens: each prompt, each tool call with its duration, subagents starting and finishing with what they consumed, the turn's total in tokens when it ends. One nick per session, so a channel of running agents reads like a team room. Python 3.9+, standard library only. Tool outputs never leave the machine. | Artistic-2.0 | ✅ | ✅ |
 | [`briefing`](https://github.com/Getty/briefing) | Subagents declare the skills they need; a hook loads those skill bodies into the agent's context *before* its first turn. No "MANDATORY: read X first" pleading, no silent skips. | Artistic-2.0 | ✅ | ✅ |
+| [`loadguard`](https://github.com/Getty/loadguard) | Runs each session in its own systemd scope with memory and CPU limits, so one runaway command is killed inside that session instead of swapping the whole machine to death. Never rewrites a command: permissions, `cd` and exit codes stay untouched. Linux with systemd only; more stages (refusing heavy commands under pressure, telling the model why) are on the way. | Artistic-2.0 | ✅ | — |
 | [`manage-skills`](https://github.com/Getty/manage-skills) | One source of truth per skill, hardlinks everywhere else. Ships the `manage-skills` CLI plus the skills that explain how to drive it. | MIT | ✅ | ✅ |
 | [`skills`](https://github.com/Getty/skills) | The skills that belong to no single project: Perl house style and release tooling, git conventions, Kubernetes and containers, driving Claude Code and Codex headless, and the craft of writing skills themselves. A skill lives there only as long as nothing else claims it. | Artistic-2.0 | ✅ | ✅ |
 
 ```
 /plugin install agent-irc@getty
 /plugin install briefing@getty
+/plugin install loadguard@getty
 /plugin install manage-skills@getty
 /plugin install skills@getty
 
