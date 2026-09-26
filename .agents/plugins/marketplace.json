@@ -62,7 +62,7 @@
     },
     {
       "name": "skilletor",
-      "description": "Remote skills, agents and rules for Codex and Claude Code — declared once in skilletor.json, synced on every session, templated per project.",
+      "description": "Remote skills, agents and rules for Codex and Claude Code — declared once in skilletor.json, synced on every session, templated per project. For Codex: skills in .agents/skills, agents as agent-role TOML, rules injected at session start by the hook.",
       "source": {
         "source": "url",
         "url": "https://github.com/Getty/skilletor.git",

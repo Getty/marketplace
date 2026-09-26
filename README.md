@@ -20,19 +20,19 @@ codex plugin marketplace add Getty/marketplace     # Codex
 | [`agent-irc`](https://github.com/Getty/agent-irc) | Mirrors a session into IRC as it happens: each prompt, each tool call with its duration, subagents starting and finishing with what they consumed, the turn's total in tokens when it ends. One nick per session, so a channel of running agents reads like a team room. Python 3.9+, standard library only. Tool outputs never leave the machine. | Artistic-2.0 | ✅ | ✅ |
 | [`briefing`](https://github.com/Getty/briefing) | Subagents declare the skills they need; a hook loads those skill bodies into the agent's context *before* its first turn. No "MANDATORY: read X first" pleading, no silent skips. | Artistic-2.0 | ✅ | ✅ |
 | [`loadguard`](https://github.com/Getty/loadguard) | Runs each session in its own systemd scope with memory and CPU limits, so one runaway command is killed inside that session instead of swapping the whole machine to death. Never rewrites a command: permissions, `cd` and exit codes stay untouched. Linux with systemd only; more stages (refusing heavy commands under pressure, telling the model why) are on the way. | Artistic-2.0 | ✅ | — |
-| [`manage-skills`](https://github.com/Getty/manage-skills) | One source of truth per skill, hardlinks everywhere else. Ships the `manage-skills` CLI plus the skills that explain how to drive it. | MIT | ✅ | ✅ |
+| [`skilletor`](https://github.com/Getty/skilletor) | Skills, agents and rules from wherever they live — git repos, https tarballs, local directories, Claude plugin repos, even a project's own `.claude/` folder — declared once in `skilletor.json`, synced at every session start and rendered per project from Nunjucks templates. A source a cloned project declares installs only after you trust it. Ships the `skilletor` CLI. If you want shared skills, this is most likely the one you want. | MIT | ✅ | ✅ |
 | [`skills`](https://github.com/Getty/skills) | The skills that belong to no single project: Perl house style and release tooling, git conventions, Kubernetes and containers, driving Claude Code and Codex headless, and the craft of writing skills themselves. A skill lives there only as long as nothing else claims it. | Artistic-2.0 | ✅ | ✅ |
 
 ```
 /plugin install agent-irc@getty
 /plugin install briefing@getty
 /plugin install loadguard@getty
-/plugin install manage-skills@getty
+/plugin install skilletor@getty
 /plugin install skills@getty
 
 codex plugin add agent-irc@getty
 codex plugin add briefing@getty
-codex plugin add manage-skills@getty
+codex plugin add skilletor@getty
 codex plugin add skills@getty
 ```
 
@@ -62,6 +62,33 @@ format, the sending-rate knobs, and what each level discloses are in the
 [plugin's README](https://github.com/Getty/agent-irc#readme) and its
 [privacy note](https://github.com/Getty/agent-irc/blob/main/PRIVACY.md).
 
+## On its own track: manage-skills
+
+Looking for shared skills? You most likely want [`skilletor`](#plugins): it pulls skills,
+agents and rules from wherever they live and keeps every project current by itself.
+`manage-skills` solves a narrower problem, and still solves it well: **many projects on the
+same machine sharing one copy of each skill.** Every project gets a hardlink to the one
+source of truth — edit it once and every checkout changes with it; git sees an ordinary
+file, so your team gets the skill when they clone.
+
+| Plugin | What it does | License | Claude Code | Codex |
+|---|---|:--:|:--:|:--:|
+| [`manage-skills`](https://github.com/Getty/manage-skills) | One source of truth per skill, hardlinks everywhere else. Ships the `manage-skills` CLI plus the skills that explain how to drive it. | MIT | ✅ | ✅ |
+
+```
+/plugin install manage-skills@getty
+codex plugin add manage-skills@getty
+```
+
+This catalog is the convenient way in, not the only one. `manage-skills` is a standalone
+CLI first and a plugin second — a single self-contained bash script with no dependencies,
+versioned on its own release cycle. It needs neither this catalog nor any particular agent
+harness, which is rather the point of it:
+
+```
+curl -fsSL https://raw.githubusercontent.com/Getty/manage-skills/main/install.sh | sh
+```
+
 ### manage-skills on Codex
 
 A Codex plugin manifest cannot put a command on `PATH`, so `manage-skills` is reached by
@@ -69,19 +96,7 @@ path there: the script ships in the plugin root, and the skill that documents it
 where. Codex gives the model the absolute path of every `SKILL.md`, so a relative
 reference resolves without anything else. If you want the command in your own shell too —
 worth doing in either harness, since a plugin only reaches the agent's shell — install it
-directly (below).
-
-## manage-skills also runs on its own track
-
-This catalog is the convenient way in. For `manage-skills` it is not the only one:
-
-```
-curl -fsSL https://raw.githubusercontent.com/Getty/manage-skills/main/install.sh | sh
-```
-
-It is a standalone CLI first and a plugin second — a single self-contained bash script
-with no dependencies, versioned on its own release cycle. It needs neither this catalog
-nor any particular agent harness, which is rather the point of it.
+directly (above).
 
 ## What this repo is
 
@@ -106,4 +121,4 @@ they would on your machine. `scripts/check-manifests.py` runs the first part by 
 
 ## License
 
-The catalog is MIT. Each plugin carries its own license; the table above lists them.
+The catalog is MIT. Each plugin carries its own license; the tables above list them.
