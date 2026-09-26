@@ -37,7 +37,7 @@
         "source": "github",
         "repo": "Getty/loadguard"
       },
-      "description": "Keeps AI-issued shell commands from taking down the host: each session runs in its own systemd scope with memory and CPU limits, so a runaway command hits a wall instead of swapping the box to death. Linux only.",
+      "description": "Keeps AI-issued shell commands from taking down the host: each session runs in its own systemd scope with memory and CPU limits, and under memory pressure heavy commands (test suites, builds, headless agents, anything it has seen eat a fifth of the RAM) are refused with the reason told to the model. Linux only.",
       "license": "Artistic-2.0",
       "homepage": "https://github.com/Getty/loadguard",
       "category": "productivity",
