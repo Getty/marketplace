@@ -56,6 +56,18 @@
       "tags": ["skills", "hardlinks", "sync", "sharing"]
     },
     {
+      "name": "ruler",
+      "source": {
+        "source": "github",
+        "repo": "Getty/ruler"
+      },
+      "description": "Keeps CLAUDE.md and the rules without paths in context across every compaction, and their copies out of the compaction summary.",
+      "license": "Artistic-2.0",
+      "homepage": "https://github.com/Getty/ruler",
+      "category": "productivity",
+      "tags": ["compaction", "instructions", "rules", "context", "hooks"]
+    },
+    {
       "name": "skilletor",
       "source": {
         "source": "github",

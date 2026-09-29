@@ -20,6 +20,7 @@ codex plugin marketplace add Getty/marketplace     # Codex
 | [`agent-irc`](https://github.com/Getty/agent-irc) | Mirrors a session into IRC as it happens: each prompt, each tool call with its duration, subagents starting and finishing with what they consumed, the turn's total in tokens when it ends. One nick per session, so a channel of running agents reads like a team room. Python 3.9+, standard library only. Tool outputs never leave the machine. | Artistic-2.0 | ✅ | ✅ |
 | [`briefing`](https://github.com/Getty/briefing) | Subagents declare the skills they need; a hook loads those skill bodies into the agent's context *before* its first turn. No "MANDATORY: read X first" pleading, no silent skips. | Artistic-2.0 | ✅ | ✅ |
 | [`loadguard`](https://github.com/Getty/loadguard) | Runs each session in its own systemd scope with memory and CPU limits, so one runaway command is killed inside that session instead of swapping the whole machine to death. Under memory pressure, or with too many heavy commands running across sessions, it refuses the next test suite, build or headless agent — and any command it has seen eat a fifth of the RAM — and tells the model why. Never rewrites a command: permissions, `cd` and exit codes stay untouched. Linux with systemd only. | Artistic-2.0 | ✅ | ✅ |
+| [`ruler`](https://github.com/Getty/ruler) | Keeps your project instructions in context across compactions. Before one, it tells the summary which instruction files come back from disk anyway, so their content stays out of it; after one, it checks which of them Claude Code reported as reloaded and attaches the ones that did not come back, read fresh from disk. Covers what loads at session start: `CLAUDE.md`, rules without `paths:` and their `@import`s. Adds nothing when everything came back. Python 3, standard library only. | Artistic-2.0 | ✅ | — |
 | [`skilletor`](https://github.com/Getty/skilletor) | Skills, agents and rules from wherever they live — git repos, https tarballs, local directories, Claude plugin repos, even a project's own `.claude/` folder — declared once in `skilletor.json`, synced at every session start and rendered per project from Nunjucks templates. A source a cloned project declares installs only after you trust it. Ships the `skilletor` CLI. If you want shared skills, this is most likely the one you want. | MIT | ✅ | ✅ |
 | [`skills`](https://github.com/Getty/skills) | The skills that belong to no single project: Perl house style and release tooling, git conventions, Kubernetes and containers, driving Claude Code and Codex headless, and the craft of writing skills themselves. A skill lives there only as long as nothing else claims it. | Artistic-2.0 | ✅ | ✅ |
 
@@ -27,6 +28,7 @@ codex plugin marketplace add Getty/marketplace     # Codex
 /plugin install agent-irc@getty
 /plugin install briefing@getty
 /plugin install loadguard@getty
+/plugin install ruler@getty
 /plugin install skilletor@getty
 /plugin install skills@getty
 
