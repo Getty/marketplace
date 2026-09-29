@@ -99,6 +99,27 @@ reference resolves without anything else. If you want the command in your own sh
 worth doing in either harness, since a plugin only reaches the agent's shell — install it
 directly (above).
 
+## Not mine, but recommended
+
+Plugins from other people that I install on every machine. They are not in this catalog —
+each comes from its own marketplace, so it updates on its author's schedule, not mine.
+
+| Plugin | What it does | License | Claude Code | Codex |
+|---|---|:--:|:--:|:--:|
+| [`superpowers`](https://github.com/obra/superpowers) | A working method rather than a pile of tips: brainstorm before building, write the plan down, drive it through subagents with a review after each task, red/green TDD, and systematic debugging instead of guessing. Also teaches the model to write and test skills of its own. | MIT | ✅ | ✅ |
+| [`mattpocock-skills`](https://github.com/mattpocock/skills) | Matt Pocock's engineering skills: grilling you about a plan until it holds, TDD, a two-axis code review against your standards and the spec, domain modelling with `CONTEXT.md` and ADRs, throwaway prototypes, and writing docs that agents actually follow. | MIT | ✅ | skills only |
+
+```
+/plugin install superpowers@claude-plugins-official
+/plugin install mattpocock-skills@claude-plugins-official
+```
+
+Both sit in Anthropic's official marketplace, which Claude Code knows out of the box.
+Superpowers is in the official Codex marketplace too — open `/plugins` in Codex and pick
+it there. Matt Pocock's set has no Codex plugin yet; his installer copies the skills into
+a project instead (`npx skills@latest add mattpocock/skills`), and says to take
+`setup-matt-pocock-skills` along with them.
+
 ## What this repo is
 
 Only a catalog. Adding a plugin here means one entry, not a copy of anything. Nothing is
