@@ -132,8 +132,12 @@ the format:
 | | Claude Code | Codex |
 |---|---|---|
 | Manifest | `.claude-plugin/marketplace.json` | `.agents/plugins/marketplace.json` |
-| Source type | `github` + `repo` | `url` / `git-subdir` |
+| Source type | `url` (HTTPS git URL) | `url` / `git-subdir` |
 | Per entry | tags, category | `policy.installation`, `policy.authentication`, `category` |
+
+Claude Code entries point at HTTPS git URLs rather than `github` + `repo`: with the
+`github` form the installer may clone over SSH, which fails on any machine whose key
+GitHub does not know. Every repository here is public, so HTTPS needs no key at all.
 
 Codex does read `.claude-plugin/marketplace.json` as a legacy location, but it does not
 accept Claude Code's schema there, so one file cannot serve both.

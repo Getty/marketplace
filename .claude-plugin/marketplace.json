@@ -10,8 +10,8 @@
     {
       "name": "agent-irc",
       "source": {
-        "source": "github",
-        "repo": "Getty/agent-irc"
+        "source": "url",
+        "url": "https://github.com/Getty/agent-irc.git"
       },
       "description": "Mirrors a session's activity into IRC: prompts, tool calls with durations, subagents, token usage. One nick per session.",
       "license": "Artistic-2.0",
@@ -22,8 +22,8 @@
     {
       "name": "briefing",
       "source": {
-        "source": "github",
-        "repo": "Getty/briefing"
+        "source": "url",
+        "url": "https://github.com/Getty/briefing.git"
       },
       "description": "Programmatic briefing beats prompt stuffing. Pre-loads declared skills into a subagent's context at spawn time, so it wakes up already briefed.",
       "license": "Artistic-2.0",
@@ -34,8 +34,8 @@
     {
       "name": "loadguard",
       "source": {
-        "source": "github",
-        "repo": "Getty/loadguard"
+        "source": "url",
+        "url": "https://github.com/Getty/loadguard.git"
       },
       "description": "Keeps AI-issued shell commands from taking down the host: each session runs in its own systemd scope with memory and CPU limits, and under memory pressure heavy commands (test suites, builds, headless agents, anything it has seen eat a fifth of the RAM) are refused with the reason told to the model. Linux only.",
       "license": "Artistic-2.0",
@@ -46,8 +46,8 @@
     {
       "name": "manage-skills",
       "source": {
-        "source": "github",
-        "repo": "Getty/manage-skills"
+        "source": "url",
+        "url": "https://github.com/Getty/manage-skills.git"
       },
       "description": "Hardlink-based skill sharing across projects — one source of truth per skill, hardlinks everywhere else. Puts the manage-skills CLI on PATH and ships its own skills.",
       "license": "MIT",
@@ -58,8 +58,8 @@
     {
       "name": "ruler",
       "source": {
-        "source": "github",
-        "repo": "Getty/ruler"
+        "source": "url",
+        "url": "https://github.com/Getty/ruler.git"
       },
       "description": "Keeps CLAUDE.md and the rules without paths in context across every compaction, and their copies out of the compaction summary.",
       "license": "Artistic-2.0",
@@ -70,8 +70,8 @@
     {
       "name": "skilletor",
       "source": {
-        "source": "github",
-        "repo": "Getty/skilletor"
+        "source": "url",
+        "url": "https://github.com/Getty/skilletor.git"
       },
       "description": "Remote skills, agents and rules for Claude Code and Codex — declared once in skilletor.json, synced on every session, templated per project. Adds sources like marketplaces and puts the skilletor CLI on PATH.",
       "license": "MIT",
@@ -82,8 +82,8 @@
     {
       "name": "skills",
       "source": {
-        "source": "github",
-        "repo": "Getty/skills"
+        "source": "url",
+        "url": "https://github.com/Getty/skills.git"
       },
       "description": "Cross-project skills for Claude Code and Codex — Perl house style and release tooling, git conventions, Kubernetes and container operations, and the craft of writing skills themselves. Only what has no single home of its own.",
       "license": "Artistic-2.0",
